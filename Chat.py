@@ -1,3 +1,5 @@
+# Author: DPEJOVIC
+
 import streamlit as st
 from openai import OpenAI
 
