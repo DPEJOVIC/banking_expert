@@ -12,6 +12,15 @@ st.set_page_config(
 
 st.title("Chat")
 
+def change_temp(temp):
+    st.session_state["temp"] = temp
+
+if "temp" not in st.session_state:
+    st.session_state["temp"] = 1.0
+
+temperature = st.slider("""Temperature refers to the 'randomness' or 'creativity' of the AI model's output. Lower values result in less random responses. A temperature between 0.0 and 1.0 is recommended. Select a temperature for the output: """, 0.0, 2.0, st.session_state["temp"], 0.1)
+
+change_temp(temperature)
 
 # Set up default system prompt
 with open("defaultprompt.txt", "r") as file:
@@ -75,6 +84,7 @@ if prompt := st.chat_input("Write something here"):
             model = st.session_state["openai_model"],
             messages = messages_with_system_prompt,
             stream = True,
+            temperature = st.session_state["temp"]
         )
         response = st.write_stream(stream)
 
