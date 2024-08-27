@@ -64,8 +64,6 @@ for message in st.session_state.chat_history:
         st.markdown(message["content"])
 
 
-# if st.session_state.response_counter <= 5:
-
 # Chat logic
 if prompt := st.chat_input("Write something here"):
     
@@ -90,6 +88,3 @@ if prompt := st.chat_input("Write something here"):
 
     st.session_state.response_counter += 1
     st.session_state.chat_history.append({"role": "assistant", "content": response})
-    
-# else:
-#     st.write("Chat finished!")
